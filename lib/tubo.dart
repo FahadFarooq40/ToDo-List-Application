@@ -25,10 +25,12 @@ class _TudoAppState extends State<TudoApp> {
     });
   }
 
-  void dltItems({delete}) {
-    setState(() {
-      counterName.removeAt(delete);
-    });
+  void dltItems(int delete) {
+    if (delete >= 0 && delete < counterName.length) {
+      setState(() {
+        counterName.removeAt(delete);
+      });
+    }
   }
 
   void updateItems(int index, String newValue) {
@@ -78,7 +80,7 @@ class _TudoAppState extends State<TudoApp> {
                         color: Colors.purple,
                       ),
                       onPressed: () {
-                        dltItems(delete: index);
+                        dltItems(index);
                       },
                     ),
                     IconButton(
