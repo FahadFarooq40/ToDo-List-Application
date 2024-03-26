@@ -9,6 +9,7 @@ class TudoApp extends StatefulWidget {
 
 class _TudoAppState extends State<TudoApp> {
   TextEditingController inputconntroller = TextEditingController();
+  TextEditingController updateController = TextEditingController();
 
   List counterName = [
     "Fahad Farooq",
@@ -30,9 +31,18 @@ class _TudoAppState extends State<TudoApp> {
     });
   }
 
+  void updateItems(int index, String newValue) {
+    if (index >= 0 && index < counterName.length) {
+      setState(() {
+        counterName[index] = newValue;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 232, 195, 242),
       appBar: AppBar(
         title: const Text(
           "Tubo Application",
@@ -59,14 +69,28 @@ class _TudoAppState extends State<TudoApp> {
                   counterName[index],
                   style: const TextStyle(color: Colors.purple),
                 ),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.delete,
-                    color: Colors.purple,
-                  ), // Icon for IconButton
-                  onPressed: () {
-                    dltItems(delete: index);
-                  },
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.delete,
+                        color: Colors.purple,
+                      ),
+                      onPressed: () {
+                        dltItems(delete: index);
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.edit_document,
+                        color: Colors.deepPurple,
+                      ),
+                      onPressed: () {
+                        showUpdateDialog(index);
+                      },
+                    ),
+                  ],
                 ),
               ),
             );
@@ -122,5 +146,46 @@ class _TudoAppState extends State<TudoApp> {
       ],
     );
     showDialog(context: context, builder: (BuildContext context) => alert);
+  }
+
+  void showUpdateDialog(int index) {
+    updateController.text = counterName[index];
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: TextField(
+            controller: updateController,
+            decoration: const InputDecoration(
+              labelText: "Update Item",
+              hintText: "Enter Updated Information",
+              icon: Icon(Icons.update),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                updateItems(index, updateController.text);
+                Navigator.pop(context);
+              },
+              child: const Text(
+                "Update",
+                style: TextStyle(color: Colors.purple),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                "Cancel",
+                style: TextStyle(color: Colors.red),
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 }
