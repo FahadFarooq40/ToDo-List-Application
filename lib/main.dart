@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tubo App',
+      title: 'Tubo Application',
       home: TudoApp(),
     );
   }
