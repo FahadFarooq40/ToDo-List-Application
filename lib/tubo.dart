@@ -16,7 +16,16 @@ class _TudoAppState extends State<TudoApp> {
     "Umer Farooq",
     "Farooq Khhan",
     "Arham Farooq",
-    "Subhan Khhan",
+    "farooq khan",
+    "Yousuf Ali",
+    "Salman Khan",
+    "Areeb Farooq",
+    "Mehrren Farooq",
+    "Uzair Khhan",
+    "Ali KHalib",
+    "Usman khan",
+    "Asher Rehmen",
+    "Bilal Khan",
   ];
 
   additems() {
@@ -52,51 +61,69 @@ class _TudoAppState extends State<TudoApp> {
               fontSize: 20, fontWeight: FontWeight.bold, color: Colors.purple),
         ),
         leading: GestureDetector(
-          onTap: () {
-            // Implement action for menu button tap
-          },
+          onTap: () {},
           child: const Icon(Icons.menu),
         ),
       ),
       body: SafeArea(
         minimum: const EdgeInsets.all(10),
-        child: ListView.builder(
-          itemCount: counterName.length,
-          itemBuilder: (context, index) {
-            return Container(
-              margin: const EdgeInsets.only(bottom: 2),
-              child: ListTile(
-                tileColor: Colors.teal,
-                title: Text(
-                  counterName[index],
-                  style: const TextStyle(color: Colors.purple),
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.delete,
-                        color: Colors.purple,
-                      ),
-                      onPressed: () {
-                        dltItems(index);
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.edit_document,
-                        color: Colors.deepPurple,
-                      ),
-                      onPressed: () {
-                        showUpdateDialog(index);
-                      },
-                    ),
-                  ],
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 10, top: 10),
+              color: Colors.deepPurple,
+              height: 200,
+              child: const Center(
+                child: Text(
+                  "TODO APPLICATION: ",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
-            );
-          },
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: counterName.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 2),
+                    child: ListTile(
+                      tileColor: Colors.white,
+                      title: Text(
+                        counterName[index],
+                        style: const TextStyle(color: Colors.purple),
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.purple,
+                            ),
+                            onPressed: () {
+                              dltItems(index);
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.edit_document,
+                              color: Colors.deepPurple,
+                            ),
+                            onPressed: () {
+                              showUpdateDialog(index);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -118,8 +145,9 @@ class _TudoAppState extends State<TudoApp> {
               controller: inputconntroller,
               autofocus: true,
               decoration: const InputDecoration(
-                  labelText: "Tubo Application",
-                  hintText: "Enter Your Information: ",
+                  labelText: "Tubo App",
+                  prefixIconColor: Colors.deepPurpleAccent,
+                  hintText: "Enter Your Information:",
                   icon: Icon(Icons.note_add)),
             ),
           )
@@ -132,7 +160,7 @@ class _TudoAppState extends State<TudoApp> {
             inputconntroller.clear();
           },
           child: const Text(
-            "Save ToDo Application",
+            "Save ToDo ",
             style: TextStyle(color: Colors.purple, fontSize: 15),
           ),
         ),
